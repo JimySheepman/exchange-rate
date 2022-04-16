@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+
+  postgres:
+    container_name: postgres
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: er
+      POSTGRES_USER: merlins
+      POSTGRES_PASSWORD: root
+    ports:
+    - 5432:5432
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+        - test-network
+
+    rabbitmq:
+        hostname: 'dev-rabbitmq'
+        image: rabbitmq:3.8.14-management
+        container_name: 'project-rabbitmq'
+        restart: always
+        ports:
+            - 5672:5672
+            - 15672:15672
+        volumes:
+            - '~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/mnesia/'
+        networks:
+            - test-network
+
+networks:
+    test-network:
+        driver: bridge
