@@ -11,3 +11,10 @@ type Rates struct {
 	BaseCode           string             `json:"base_code"`
 	ConversionRates    map[string]float64 `json:"conversion_rates"`
 }
+
+type Currencies struct {
+	BaseCode       string  `json:"base_code"`
+	TargetCode     string  `json:"target_code"`
+	ConversionRate float64 `json:"conversion_rate"`
+	CreatedAt      string  `json:"create_at"`
+}
