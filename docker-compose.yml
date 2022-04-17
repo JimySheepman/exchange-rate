@@ -14,7 +14,7 @@ services:
       - test-network
     container_name: er-api
     env_file:
-      - ../.env
+      - ./.env
 
   er-api-producer:
     build:
@@ -25,7 +25,7 @@ services:
     restart: always
     container_name: er-api-producer
     env_file:
-      - ../.env
+      - ./.env
 
   er-rabbit-consumer:
     build:
@@ -38,7 +38,7 @@ services:
       - test-network
     container_name: er-rabbit-consumer
     env_file:
-      - ../.env
+      - ./.env
 
   postgres:
     container_name: postgres
