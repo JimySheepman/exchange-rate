@@ -12,7 +12,7 @@ func init() {
 }
 
 func main() {
-	gocron.Every(30).Seconds().Do(task.Task)
+	gocron.Every(1).Minute().Do(task.Task)
 
 	<-gocron.Start()
 }
