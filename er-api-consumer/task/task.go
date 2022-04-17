@@ -62,10 +62,14 @@ func UnmarshalValueForCurrencies(req []byte) model.Currencies {
 }
 
 func SentToQueueByPairvalue(rates model.Rates) {
-	for target := range rates.ConversionRates {
-		value := GetAllValueFromAPI(PAIR_PATH, rates.BaseCode+"/"+target)
-		data := UnmarshalValueForCurrencies(value)
-		data.CreatedAt = time.Now().UTC().Unix()
+	for target, conversion_rate := range rates.ConversionRates {
+		data := model.Currencies{
+			BaseCode:       rates.BaseCode,
+			TargetCode:     target,
+			ConversionRate: conversion_rate,
+			CreatedAt:      time.Now().UTC().Unix(),
+		}
+
 		Send(data, rates.BaseCode)
 		time.Sleep(100 * time.Millisecond)
 	}
