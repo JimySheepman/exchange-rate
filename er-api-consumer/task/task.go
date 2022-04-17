@@ -71,6 +71,5 @@ func SentToQueueByPairvalue(rates model.Rates) {
 		}
 
 		Send(data, rates.BaseCode)
-		time.Sleep(100 * time.Millisecond)
 	}
 }
